@@ -1,8 +1,8 @@
-import config from './site-config.js?v=7983e8b98b1d9268';
-import { harnessLogo } from './logos.js?v=7983e8b98b1d9268';
-import { petContents, hydratePets } from './pets.js?v=7983e8b98b1d9268';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=7983e8b98b1d9268';
-import { mountWorkspace } from './workspace.js?v=7983e8b98b1d9268';
+import config from './site-config.js?v=ae27bfce0a58a927';
+import { harnessLogo } from './logos.js?v=ae27bfce0a58a927';
+import { petContents, hydratePets } from './pets.js?v=ae27bfce0a58a927';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=ae27bfce0a58a927';
+import { mountWorkspace } from './workspace.js?v=ae27bfce0a58a927';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -196,13 +196,13 @@ $('#close-reset').addEventListener('click', () => {
 });
 
 const architecture = {
-  log: ['The record', 'A little history. A lot less repeating.', "A local record of what happened, so the next agent doesn't have to rediscover everything.", ['14:32 · Claude · file modified', '14:34 · Claude · test failed', '14:36 · JB · handoff prepared'], 'Illustrative events. Hooks redact → spool → daemon → JSONL log. The log is the source for the rebuildable index.'],
+  log: ['The record', 'Append-only JSONL. One writer.', "Hooks redact into a durable local spool. The daemon ingests events into per-project JSONL streams with sequence, hash chain, redacted vendor payload, and a versioned normalized form.", ['14:32 · Claude · file modified', '14:34 · Claude · test failed', '14:36 · JB · handoff prepared'], 'Illustrative events. Hooks redact → spool → daemon → JSONL log. The log is the source for the rebuildable index.'],
   index: ['The catalogue', 'Rebuilt from the record.', 'SQLite indexes the append-only log for lookup. The index can be removed and rebuilt from the files you own.', ['JSONL event log → SQLite index', 'Recorded events → state projections'], 'A derived index, rather than another private memory silo.'],
-  handoff: ['The continuation', 'The right notes for the next agent.', 'The builder selects a recorded window, project/git state, and session cursor to assemble a relevant packet. Failed approaches travel with it.', ['Event log + project/git state + cursor', 'Selected context → supported delivery → harness'], 'A new session gets context since the last accepted close. A resumed session gets the relevant delta.'],
-  bridge: ['The exchange', 'A bridge for capable agents.', 'Typed messages, replies to exact claims, task and file ownership, reviews, and contracts connect work across harnesses.', ['Agent → stdio MCP → agent socket', 'Typed operations → recorded coordination'], 'Planned collaboration. The bridge enforces budgets, provenance, and human decision rights.'],
+  handoff: ['The continuation', 'A pure, bounded packet builder.', 'The builder selects a recorded window, project/git state, and session cursor to assemble a relevant packet. Failed approaches travel with it.', ['Event log + project/git state + cursor', 'Selected context → supported delivery → harness'], 'A new session gets context since the last accepted close. A resumed session gets the relevant delta.'],
+  bridge: ['The exchange', 'Typed messages, leases, and contracts.', 'Typed messages, replies to exact claims, task and file ownership, reviews, and contracts connect work across harnesses.', ['Agent → stdio MCP → agent socket', 'Typed operations → recorded coordination'], 'Planned collaboration. The bridge enforces budgets, provenance, and human decision rights.'],
   rules: ['The boundaries', 'Your rules, close to the work.', 'Rules compile into the available harness-native controls, local gate hooks, and git guards. A gate evaluates locally even if the daemon is down.', ['Rule source → native rules + local gates', 'Local check → allow, deny, or human decision'], 'Coverage varies by mechanism. Jugalbandi never answers a native permission prompt or bypasses harness trust.'],
   adapters: ['The connections', 'Official seams. Existing tools.', 'Hooks observe supported events. MCP provides structured tools. Codex uses supported app-server interfaces where a version probe proves the capability.', ['Hooks → redact → local spool → daemon', 'MCP requests ↔ structured operations'], 'Compatibility must be verified for the installed harness version. No vendor login tokens are reused.'],
-  daemon: ['The local core', 'One writer, an independent record.', 'An on-demand local service ingests events and writes the log and its projections. Agents ask for operations through supported adapters.', ['Agent socket · human socket', 'One daemon → log + derived state'], 'Planned local product. Unix sockets, no TCP listener. Human-only operations stay off the agent surface.'],
+  daemon: ['The local core', 'A single writer behind two Unix sockets.', 'An on-demand local service ingests events and writes the log and its projections. Agents ask for operations through supported adapters.', ['Agent socket · human socket', 'One daemon → log + derived state'], 'Planned local product. Unix sockets, no TCP listener. Human-only operations stay off the agent surface.'],
   human: ['The final say', 'AI works. You make the calls.', 'Scope changes, breaking contracts, and irreversible actions come to you. A decision brief shows the options and evidence, then previews the exact record.', ['Question + options + evidence', 'Human acceptance → recorded decision'], 'Silence never decides. The website demonstrations do not grant real permissions.'],
   surfaces: ['The controls', 'CLI first. Workspace next.', 'The first planned release centres on hooks, handoff, and the jb CLI. A Tauri desktop workspace follows the handoff validation gate.', ['CLI → human socket → daemon', 'Planned Tauri workspace → human socket'], 'The workspace mock above shows the intended UX using sample data. It is not a released desktop app.'],
   harnesses: ['The instruments', 'The tools you already use.', 'Official Claude Code and Codex keep execution, tools, safety, permissions, and sandboxes. Jugalbandi connects the work around them.', ['Claude Code · official binary', 'Codex · official binary'], 'Their private memory remains their own. The independent project record contains supported observations and recorded work.'],
@@ -316,8 +316,3 @@ $('#notify-form').addEventListener('submit', async (event) => {
   } else $('#signup-status').textContent = "We couldn't save your email. Please try again.";
 });
 
-// Colour is a visitor preference; vendor marks and product data stay stable.
-$$('[data-palette]').forEach(button => button.addEventListener('click', () => {
-  document.documentElement.dataset.palette = button.dataset.palette;
-  $$('[data-palette]').forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
-}));

@@ -1,5 +1,5 @@
-import { harnessLogo } from './logos.js?v=7983e8b98b1d9268';
-import { petContents } from './pets.js?v=7983e8b98b1d9268';
+import { harnessLogo } from './logos.js?v=ae27bfce0a58a927';
+import { petContents } from './pets.js?v=ae27bfce0a58a927';
 /** Scripted workspace preview. Fictional project, sample data, no model or payment connection. */
 const EXAMPLE_PROMPT = 'Make invoice.paid retries idempotent by provider event ID. Keep the current receipt schema, preserve retryable failures, and never log customer emails.';
 const DECISION_RECORD = '2026-10-18 | invoice.paid retries | Approve a persistent unique constraint on (provider, event_id). Keep the current receipt schema and retryable failures. Never log customer emails. | Human accepted (scripted sample)';
