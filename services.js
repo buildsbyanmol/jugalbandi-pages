@@ -58,8 +58,9 @@ export async function registerBeta({ email, platform }, config, fetcher = fetch)
   finally { clearTimeout(timeout); }
 }
 
-/** Only verified counts may become social proof; missing data is never zero. */
-export function betaCommunityLabel(count) {
+/** A cohort goal is labelled as a goal. Only verified totals may claim signups. */
+export function betaCommunityLabel(count, cohortGoal) {
+  if (Number.isSafeInteger(cohortGoal) && cohortGoal > 0) return `Goal: ${cohortGoal.toLocaleString('en-IN')} beta testers`;
   if (!Number.isSafeInteger(count) || count < 0) return 'Beta list is open';
   if (count === 0) return 'Be the first to join';
   return `${count.toLocaleString('en-IN')} ${count === 1 ? 'person has' : 'people have'} joined`;

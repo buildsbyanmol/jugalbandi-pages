@@ -1,8 +1,8 @@
-import config from './site-config.js?v=ac0a98492dc49a45';
-import { harnessLogo } from './logos.js?v=ac0a98492dc49a45';
-import { petContents, hydratePets } from './pets.js?v=ac0a98492dc49a45';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=ac0a98492dc49a45';
-import { mountWorkspace } from './workspace.js?v=ac0a98492dc49a45';
+import config from './site-config.js?v=5a4857dcda9634dd';
+import { harnessLogo } from './logos.js?v=5a4857dcda9634dd';
+import { petContents, hydratePets } from './pets.js?v=5a4857dcda9634dd';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=5a4857dcda9634dd';
+import { mountWorkspace } from './workspace.js?v=5a4857dcda9634dd';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -270,9 +270,11 @@ function openBetaRegistration() {
 }
 $$('[data-beta]').forEach((button) => {
   const marker = $('.beta-trust', button);
-  marker.textContent = betaCommunityLabel(config.betaCommunity?.verifiedRegistrations);
+  marker.textContent = betaCommunityLabel(config.betaCommunity?.verifiedRegistrations, config.betaCommunity?.cohortGoal);
   const verifiedAt = config.betaCommunity?.verifiedAt;
-  if (verifiedAt && Number.isSafeInteger(config.betaCommunity?.verifiedRegistrations)) {
+  if (Number.isSafeInteger(config.betaCommunity?.cohortGoal) && config.betaCommunity.cohortGoal > 0) {
+    marker.title = 'Our target for the first beta cohort.';
+  } else if (verifiedAt && Number.isSafeInteger(config.betaCommunity?.verifiedRegistrations)) {
     marker.title = `Verified registration snapshot: ${new Date(verifiedAt).toLocaleDateString('en-IN', {timeZone:'Asia/Kolkata', day:'numeric', month:'short', year:'numeric'})}`;
   }
   button.addEventListener('click', openBetaRegistration);
