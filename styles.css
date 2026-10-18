@@ -667,3 +667,18 @@ html[data-motion="reduced"] .pet-frames, .is-paused .pet-frames, .is-offscreen .
 .engineering-topic > summary::after { content: "+"; position: absolute; right: 4px; top: 24px; }
 .engineering-topic[open] > summary::after { content: "−"; }
 .engineering-topic[open] > summary > span { transform: none; }
+
+.system-flow, .socket-diagram { margin: 26px 0; padding: 22px; background: #fffaf3; border: 1px solid var(--rule); border-radius: 12px; }
+.system-flow figcaption, .socket-diagram figcaption { font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+.system-flow ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; }
+.system-flow li { position: relative; padding-top: 14px; border-top: 3px solid var(--stage-edge); }
+.system-flow li:not(:last-child)::after { content: '→'; position: absolute; top: -16px; right: -23px; color: var(--brand-accent); font-size: 23px; }
+.system-flow strong, .system-flow li span { display: block; }
+.system-flow li span, .socket-lanes span, .socket-lanes small { font-size: 13px; margin-top: 8px; }
+.engineering-body .flow-exception { margin: 20px 0 0; padding-top: 14px; border-top: 1px dashed var(--rule); font-size: 12px; color: var(--muted); }
+.socket-lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.socket-lanes > div { display: flex; flex-direction: column; border-left: 3px solid var(--teal); padding-left: 16px; }
+.socket-lanes .human-lane { border-color: var(--plum); }
+.socket-lanes code { margin-top: 15px; font-size: 14px; }
+.flow-daemon { text-align: center; padding: 16px; margin-top: 20px; border-block: 1px solid var(--rule); font-size: 13px; }
+@media(max-width:680px) { .system-flow, .socket-diagram { padding: 18px; } .system-flow ol, .socket-lanes { grid-template-columns: 1fr; gap: 28px; } .system-flow li:not(:last-child)::after { content: '↓'; top: auto; bottom: -28px; left: 0; right: auto; } }
