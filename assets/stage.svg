@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" fill="none">
+  <!-- A quiet contemporary miniature stage. Story and controls remain in HTML. -->
+  <defs>
+    <pattern id="weave" width="28" height="16" patternUnits="userSpaceOnUse">
+      <path d="m0 8 7-4 7 4 7-4 7 4M0 16l7-4 7 4 7-4 7 4" stroke="#13786B" stroke-width=".7" opacity=".2"/>
+    </pattern>
+  </defs>
+  <path d="M41 352V145c0-58 42-98 98-98h118c28 0 49-12 63-28 18 16 40 21 63 21 68 0 120-14 167-32 47 18 99 32 167 32 23 0 45-5 63-21 14 16 35 28 63 28h118c56 0 98 40 98 98v207" fill="#F5F4EA"/>
+  <path d="M54 351V146c0-50 35-86 85-86h118c25 0 46-8 63-22 19 11 40 15 63 15 66 0 121-13 167-31 46 18 101 31 167 31 23 0 44-4 63-15 17 14 38 22 63 22h118c50 0 85 36 85 86v205" stroke="#C5C5AD" stroke-width="1.2"/>
+  <path d="M69 351V147c0-42 30-72 70-72h118c23 0 45-6 63-18 20 8 41 11 63 11 64 0 119-12 167-29 48 17 103 29 167 29 22 0 43-3 63-11 18 12 40 18 63 18h118c40 0 70 30 70 72v204" stroke="#D9D7BF" stroke-width=".8"/>
+  <g stroke="#D1CFB7" stroke-width="1">
+    <path d="M90 153c0-34 22-54 50-54h100m720 0h-100c-14 0-25-2-34-5M90 169v34m920-50c0-34-22-54-50-54M1010 169v34"/>
+    <path d="m312 88 8-5 8 5-8 5Zm460 0 8-5 8 5-8 5ZM541 59l9-5 9 5-9 5Z"/>
+  </g>
+  <g stroke="#D2D3BD" stroke-width=".9">
+    <path d="M219 120v155m9-143v131m652-143v155m-9-143v131" opacity=".6"/>
+    <path d="M213 117h21m-24 164h28m636-164h21m-24 164h28"/>
+    <path d="m216 111 8-7 8 7m646 0 8-7 8 7"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#6C8769" stroke-width="1.3">
+      <path d="M134 339c1-42-3-72-19-108m22 107c11-46 16-73 10-101m-10 77c-22-9-32-18-39-32m41 7c15-5 26-17 31-30"/>
+      <path d="M115 232c-13 2-23-11-20-29 15 6 24 17 20 29Zm9 29c-18 3-28-8-29-26 16 3 29 13 29 26Zm23-24c-10-8-8-25 2-37 10 12 10 29-2 37Zm-9 48c-5-16 4-31 21-36 2 18-6 31-21 36Zm-35 10c-17 1-27-9-28-24 16 1 26 9 28 24Zm51-11c15 1 27-8 30-23-16-1-27 7-30 23Z" fill="#CDD7BE"/>
+      <path d="M124 262c-10-6-18-14-25-22m48-4 2-29m-13 78 19-29m-42-24-15-23" stroke-width=".7"/>
+    </g>
+    <path d="M108 325h54l-8 39h-38Z" fill="#D6B797" stroke="#B99272" stroke-width="1.3"/>
+    <path d="M106 324h58v7h-58Zm9 18h40m-38 8h36" stroke="#B99272" stroke-width="1"/>
+    <path d="m127 337 8 5-8 5-8-5Zm16 12 8 5-8 5-8-5Z" fill="#C69E7D" opacity=".7"/>
+    <g stroke="#6C8769" stroke-width="1.3">
+      <path d="M964 338c1-38 7-69 21-97m-21 96c-15-35-18-68-12-92m13 71c22-9 34-21 38-37m-42 7c-16-5-25-15-30-29"/>
+      <path d="M984 243c13 3 25-9 25-27-15 3-25 14-25 27Zm-9 25c17 3 30-7 32-24-17 1-30 11-32 24Zm-23-23c11-7 11-23 1-36-10 10-13 25-1 36Zm12 41c2-15-6-28-22-32-3 15 5 28 22 32Zm33 12c16 0 27-11 26-26-15 3-25 11-26 26Zm-52-14c-15 1-27-7-31-22 16-1 26 6 31 22Z" fill="#CDD7BE"/>
+      <path d="m985 242 19-20m-28 43 25-16m-49-5 1-29m10 70-17-25" stroke-width=".7"/>
+    </g>
+    <path d="M939 325h54l-8 39h-38Z" fill="#D6B797" stroke="#B99272" stroke-width="1.3"/>
+    <path d="M937 324h58v7h-58Zm9 18h40m-38 8h36" stroke="#B99272" stroke-width="1"/>
+    <path d="m956 337 8 5-8 5-8-5Zm16 12 8 5-8 5-8-5Z" fill="#C69E7D" opacity=".7"/>
+  </g>
+  <ellipse cx="550" cy="371" rx="382" ry="20" fill="#E6E4D5" opacity=".65"/>
+  <path d="M199 333h702l34 29H165Z" fill="#E2E8D9" stroke="#A6B8A0" stroke-width="1.2"/>
+  <path d="M165 362h770v23H165Z" fill="#E9EDDF" stroke="#A6B8A0" stroke-width="1.2"/>
+  <path d="M165 364h770v18H165Z" fill="url(#weave)"/>
+  <path d="M180 390h740m-700 7h660" stroke="#D3D1BF" stroke-width="1"/>
+  <path d="M241 344h618m-632 7h646" stroke="#BBC9AF" stroke-width=".8"/>
+  <path d="M270 357h560" stroke="#13786B" stroke-width=".8" opacity=".25"/>
+</svg>
