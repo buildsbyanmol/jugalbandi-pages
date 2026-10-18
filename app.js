@@ -1,8 +1,8 @@
-import config from './site-config.js?v=d3a022318c206be7';
-import { harnessLogo } from './logos.js?v=d3a022318c206be7';
-import { petContents, hydratePets } from './pets.js?v=d3a022318c206be7';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=d3a022318c206be7';
-import { mountWorkspace } from './workspace.js?v=d3a022318c206be7';
+import config from './site-config.js?v=a76b7d53e5628a43';
+import { harnessLogo } from './logos.js?v=a76b7d53e5628a43';
+import { petContents, hydratePets } from './pets.js?v=a76b7d53e5628a43';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=a76b7d53e5628a43';
+import { mountWorkspace } from './workspace.js?v=a76b7d53e5628a43';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -196,6 +196,7 @@ $('#close-reset').addEventListener('click', () => {
 });
 
 const architecture = {
+  recall: ['Memory & vector recall · Phase 3', 'MCP access to project memory.', 'The read-only recall tool uses one backend interface: SQLite FTS5 by default, or optional self-hosted mem0 for vector-backed retrieval with local embeddings.', ['Agent → MCP recall → RecallBackend', 'FTS5 / optional mem0 → local vector store', 'Results → source references + backend status'], 'Planned Phase 3. FTS5 remains current and answers when mem0 is unhealthy. mem0 must use loopback and an approved local embedder; the event log remains authoritative.'],
   log: ['The record', 'Append-only JSONL. One writer.', "Hooks redact into a durable local spool. The daemon ingests events into per-project JSONL streams with sequence, hash chain, redacted vendor payload, and a versioned normalized form.", ['14:32 · Claude · file modified', '14:34 · Claude · test failed', '14:36 · JB · handoff prepared'], 'Illustrative events. Hooks redact → spool → daemon → JSONL log. The log is the source for the rebuildable index.'],
   index: ['The catalogue', 'Rebuilt from the record.', 'SQLite indexes the append-only log for lookup. The index can be removed and rebuilt from the files you own.', ['JSONL event log → SQLite index', 'Recorded events → state projections'], 'A derived index, rather than another private memory silo.'],
   handoff: ['The continuation', 'A pure, bounded packet builder.', 'The builder selects a recorded window, project/git state, and session cursor to assemble a relevant packet. Failed approaches travel with it.', ['Event log + project/git state + cursor', 'Selected context → supported delivery → harness'], 'A new session gets context since the last accepted close. A resumed session gets the relevant delta.'],

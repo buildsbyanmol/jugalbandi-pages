@@ -682,3 +682,5 @@ html[data-motion="reduced"] .pet-frames, .is-paused .pet-frames, .is-offscreen .
 .socket-lanes code { margin-top: 15px; font-size: 14px; }
 .flow-daemon { text-align: center; padding: 16px; margin-top: 20px; border-block: 1px solid var(--rule); font-size: 13px; }
 @media(max-width:680px) { .system-flow, .socket-diagram { padding: 18px; } .system-flow ol, .socket-lanes { grid-template-columns: 1fr; gap: 28px; } .system-flow li:not(:last-child)::after { content: '↓'; top: auto; bottom: -28px; left: 0; right: auto; } }
+.arch-recall { margin-top: 18px; }
+.arch-recall .arch-node { width: 100%; border-style: dashed; }
