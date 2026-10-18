@@ -57,3 +57,10 @@ export async function registerBeta({ email, platform }, config, fetcher = fetch)
   } catch { return { status: 'error' }; }
   finally { clearTimeout(timeout); }
 }
+
+/** Only verified counts may become social proof; missing data is never zero. */
+export function betaCommunityLabel(count) {
+  if (!Number.isSafeInteger(count) || count < 0) return 'Beta list is open';
+  if (count === 0) return 'Be the first to join';
+  return `${count.toLocaleString('en-IN')} ${count === 1 ? 'person has' : 'people have'} joined`;
+}

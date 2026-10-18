@@ -1,7 +1,7 @@
 import config from './site-config.js';
 import { harnessLogo } from './logos.js';
 import { petContents, hydratePets } from './pets.js';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta } from './services.js';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js';
 import { mountWorkspace } from './workspace.js';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -22,24 +22,24 @@ let paused = false;
 let visible = false;
 let lastTick = performance.now();
 const heroAgents = {
-  'claude-planner': {role:'Planner', harness:'Claude Code', symbol:'agent-a'},
-  'claude-writer': {role:'Writer', harness:'Claude Code', symbol:'agent-b'},
-  'claude-reviewer': {role:'Reviewer', harness:'Claude Code', symbol:'agent-d'},
-  'codex-builder': {role:'Builder', harness:'Codex', symbol:'agent-c'},
-  'codex-reviewer': {role:'Reviewer', harness:'Codex', symbol:'agent-b'},
-  'codex-tester': {role:'Tester', harness:'Codex', symbol:'agent-a'},
-  'cursor-designer': {role:'Designer', harness:'Cursor', symbol:'agent-d'},
-  'cursor-builder': {role:'Builder', harness:'Cursor', symbol:'agent-a'},
-  'cursor-tester': {role:'Tester', harness:'Cursor', symbol:'agent-c'},
+  'claude-backend': {role:'Backend', focus:'Services, storage & transactions', note:'Webhook fix ready. Check retries and concurrency.', reply:"I'll review the services and transaction boundaries.", harness:'Claude Code', symbol:'agent-a'},
+  'claude-pm': {role:'PM', focus:'Scope, priorities & acceptance', note:'Scope is set. The edge cases need a closer look.', reply:"I'll check scope and acceptance criteria.", harness:'Claude Code', symbol:'agent-b'},
+  'claude-researcher': {role:'Researcher', focus:'Evidence, options & dependencies', note:'Findings are sourced. The assumptions are recorded.', reply:"I'll verify the assumptions and dependencies.", harness:'Claude Code', symbol:'agent-d'},
+  'codex-frontend': {role:'Frontend', focus:'UI, interactions & accessibility', note:'The flow is wired. Loading and error states are ready.', reply:"I'll check the interaction and accessibility details.", harness:'Codex', symbol:'agent-c'},
+  'codex-qa': {role:'QA', focus:'Regressions, retries & edge cases', note:'The regression is reproduced, with a failing check.', reply:"I'll test duplicate deliveries and rollback.", harness:'Codex', symbol:'agent-b'},
+  'codex-security': {role:'Security', focus:'Permissions, secrets & trust', note:'Trust boundaries are mapped. Risks are flagged.', reply:"I'll inspect permissions, secrets, and trust boundaries.", harness:'Codex', symbol:'agent-a'},
+  'cursor-api': {role:'APIs', focus:'Contracts, errors & integrations', note:'The contract is defined, including failure responses.', reply:"I'll check contracts, versioning, and error cases.", harness:'Cursor', symbol:'agent-d'},
+  'cursor-data': {role:'Data', focus:'Schemas, migrations & quality', note:'The schema change and migration risks are recorded.', reply:"I'll review schema changes and migration safety.", harness:'Cursor', symbol:'agent-a'},
+  'cursor-agents': {role:'Agent systems', focus:'Tools, context & handoffs', note:'Tool calls and handoff boundaries are traced.', reply:"I'll trace the tools, context, and handoffs.", harness:'Cursor', symbol:'agent-c'},
 };
-let heroPair = ['claude-planner', 'codex-reviewer'];
+let heroPair = ['claude-backend', 'codex-qa'];
 function showHeroBeat() {
   const step = Number(hero.dataset.step);
   const from = heroAgents[heroPair[0]], to = heroAgents[heroPair[1]];
   const beats = [
-    ['API done. Tests are still failing.', `${from.role} · ${from.harness}`],
+    [from.note, `${from.role} · ${from.harness}`],
     ['Decisions, changes, and dead ends.', 'Context packet prepared'],
-    ["Got it. I'll pick up the failing test.", `${to.role} · ${to.harness}`],
+    [to.reply, `${to.role} · ${to.harness}`],
     ['The work continues, with its history.', 'Context handed over ✓'],
   ];
   $('#hero-exchange-copy').textContent = beats[step][0];
@@ -51,6 +51,7 @@ function renderHeroPair() {
     const element = $(`#hero-agent-${position}`);
     $('svg',element).innerHTML = petContents(agent.symbol);
     $('strong',element).textContent = agent.role;
+    $('.agent-focus',element).textContent = agent.focus;
     $('span',element).innerHTML = `${harnessLogo(agent.harness)}from ${agent.harness}`;
   });
   $$('[data-agent]').forEach(button => {
@@ -267,7 +268,15 @@ function openBetaRegistration() {
   }
   dialog.showModal();
 }
-$$('[data-beta]').forEach((button) => button.addEventListener('click', openBetaRegistration));
+$$('[data-beta]').forEach((button) => {
+  const marker = $('.beta-trust', button);
+  marker.textContent = betaCommunityLabel(config.betaCommunity?.verifiedRegistrations);
+  const verifiedAt = config.betaCommunity?.verifiedAt;
+  if (verifiedAt && Number.isSafeInteger(config.betaCommunity?.verifiedRegistrations)) {
+    marker.title = `Verified registration snapshot: ${new Date(verifiedAt).toLocaleDateString('en-IN', {timeZone:'Asia/Kolkata', day:'numeric', month:'short', year:'numeric'})}`;
+  }
+  button.addEventListener('click', openBetaRegistration);
+});
 $('.dialog-close').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', (event) => { if (event.target === dialog && (event.clientX < dialog.getBoundingClientRect().left || event.clientX > dialog.getBoundingClientRect().right || event.clientY < dialog.getBoundingClientRect().top || event.clientY > dialog.getBoundingClientRect().bottom)) dialog.close(); });
 $('#notify-submit').disabled = !apiReady;

@@ -587,3 +587,22 @@ html[data-motion="reduced"] .pet-frames, .is-paused .pet-frames, .is-offscreen .
   .harness-group header > small { margin-left: 0; }
   .workspace-agent div > span { justify-content: center; }
 }
+
+.agent-choice > span { font-size: 11px; min-height: 30px; display: grid; place-items: center; text-align: center; }
+.workspace-agent .agent-focus { display: block; color: #5a6851; font-size: 10px; line-height: 1.5; margin-top: 5px; max-width: 160px; }
+@media (max-width: 680px) { .agent-choice > span { font-size: 10px; } .workspace-agent .agent-focus { font-size: 10px; max-width: 145px; margin-inline: auto; } }
+
+/* Softer controls, with shadows that respond to intent. */
+.button { border-radius: 18px; box-shadow: 0 4px 12px #13786b16; transition: background .2s, box-shadow .2s, transform .18s; }
+.button:hover, .button:focus-visible { box-shadow: 0 8px 22px #13786b2b; transform: translateY(-1px); }
+.button:active { transform: translateY(1px); box-shadow: 0 2px 6px #13786b1c; }
+.beta-button-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; }
+.beta-trust { font-size: 10px; line-height: 1.4; font-weight: 400; color: #e3f2eb; }
+.beta-button-arrow { align-self: center; }
+.site-header > .button { padding-block: 10px; border-radius: 15px; }
+.site-header .beta-trust { font-size: 9px; }
+.decision-options button, .demo-tabs button { border-radius: 12px; }
+.arch-node { border-radius: 14px; }
+.decision-options button, .demo-tabs button, .icon-button { transition: background .2s, box-shadow .2s; }
+.decision-options button:hover, .demo-tabs button:hover { box-shadow: 0 4px 12px #1a1d2310; }
+@media (max-width: 680px) { .site-header > .button { min-height: 52px; } .site-header .beta-trust { font-size: 9px; } }

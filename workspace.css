@@ -241,3 +241,8 @@ html[data-motion="reduced"] .workspace-preview *, html[data-motion="reduced"] .w
 
 .workspace-preview .wp-agent small { display: flex; align-items: center; gap: 4px; }
 .workspace-preview .wp-agent small .harness-logo, .workspace-preview .wp-vendor-quota .harness-logo { width: 14px; height: 14px; flex-basis: 14px; }
+
+.workspace-preview .wp-primary, .workspace-preview .wp-secondary, .workspace-preview .wp-run { border-radius: 13px; transition: background .2s, box-shadow .2s, transform .18s; }
+.workspace-preview .wp-demo-controls button, .workspace-preview .wp-message-event { border-radius: 10px; transition: background .2s, box-shadow .2s; }
+.workspace-preview .wp-primary:hover:not(:disabled), .workspace-preview .wp-secondary:hover:not(:disabled), .workspace-preview .wp-run:hover:not(:disabled) { box-shadow: 0 5px 14px #1a1d2318; transform: translateY(-1px); }
+.workspace-preview .wp-demo-controls button:hover:not(:disabled), .workspace-preview .wp-message-event:hover { box-shadow: 0 3px 10px #1a1d2310; }

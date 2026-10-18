@@ -4,8 +4,8 @@ import { petContents } from './pets.js';
 const EXAMPLE_PROMPT = 'Make invoice.paid retries idempotent by provider event ID. Keep the current receipt schema, preserve retryable failures, and never log customer emails.';
 const DECISION_RECORD = '2026-10-18 | invoice.paid retries | Approve a persistent unique constraint on (provider, event_id). Keep the current receipt schema and retryable failures. Never log customer emails. | Human accepted (scripted sample)';
 const AGENTS = {
-  claude: { handle: 'claude-be', harness: 'Claude Code', task: 'Webhook implementation', branch: 'sample/webhook-idempotency', file: 'billing/webhooks.ts' },
-  codex: { handle: 'codex-review', harness: 'Codex', task: 'Concurrency review', branch: 'sample/retry-review', file: 'billing/webhooks.test.ts' },
+  claude: { handle: 'backend-webhooks', harness: 'Claude Code', task: 'Webhook implementation', branch: 'sample/webhook-idempotency', file: 'billing/webhooks.ts' },
+  codex: { handle: 'qa-concurrency', harness: 'Codex', task: 'Concurrency review', branch: 'sample/retry-review', file: 'billing/webhooks.test.ts' },
 };
 const STEPS = [
   {
