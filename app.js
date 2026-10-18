@@ -1,8 +1,8 @@
-import config from './site-config.js?v=5a4857dcda9634dd';
-import { harnessLogo } from './logos.js?v=5a4857dcda9634dd';
-import { petContents, hydratePets } from './pets.js?v=5a4857dcda9634dd';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=5a4857dcda9634dd';
-import { mountWorkspace } from './workspace.js?v=5a4857dcda9634dd';
+import config from './site-config.js?v=7983e8b98b1d9268';
+import { harnessLogo } from './logos.js?v=7983e8b98b1d9268';
+import { petContents, hydratePets } from './pets.js?v=7983e8b98b1d9268';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=7983e8b98b1d9268';
+import { mountWorkspace } from './workspace.js?v=7983e8b98b1d9268';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -52,7 +52,7 @@ function renderHeroPair() {
     $('svg',element).innerHTML = petContents(agent.symbol);
     $('strong',element).textContent = agent.role;
     $('.agent-focus',element).textContent = agent.focus;
-    $('span',element).innerHTML = `${harnessLogo(agent.harness)}from ${agent.harness}`;
+    $('span',element).innerHTML = `${harnessLogo(agent.harness)}from ${agent.harness}${agent.harness === 'Cursor' ? ' · planned adapter' : ''}`;
   });
   $$('[data-agent]').forEach(button => {
     const active = heroPair.includes(button.dataset.agent);
@@ -244,7 +244,7 @@ const ready = registrationReady(config.registration);
 const nativeForm = googleFormUrls(config.registration);
 const apiReady = ready && !nativeForm;
 platform.value = detectPlatform(navigator.userAgent);
-$('#platform-message').textContent = ready ? 'Launching soon. Join the beta for launch updates.' : 'Launching soon. Beta signup opens soon.';
+$('#platform-message').textContent = ready ? 'Leave your email for beta access when it is ready.' : 'Launching soon. Beta signup opens soon.';
 if (nativeForm) {
   dialog.classList.add('has-google-form');
   $('#legacy-registration').hidden = true;
@@ -315,3 +315,9 @@ $('#notify-form').addEventListener('submit', async (event) => {
     email.setAttribute('aria-invalid', 'true'); email.focus();
   } else $('#signup-status').textContent = "We couldn't save your email. Please try again.";
 });
+
+// Colour is a visitor preference; vendor marks and product data stay stable.
+$$('[data-palette]').forEach(button => button.addEventListener('click', () => {
+  document.documentElement.dataset.palette = button.dataset.palette;
+  $$('[data-palette]').forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+}));

@@ -1,5 +1,5 @@
-import { harnessLogo } from './logos.js?v=5a4857dcda9634dd';
-import { petContents } from './pets.js?v=5a4857dcda9634dd';
+import { harnessLogo } from './logos.js?v=7983e8b98b1d9268';
+import { petContents } from './pets.js?v=7983e8b98b1d9268';
 /** Scripted workspace preview. Fictional project, sample data, no model or payment connection. */
 const EXAMPLE_PROMPT = 'Make invoice.paid retries idempotent by provider event ID. Keep the current receipt schema, preserve retryable failures, and never log customer emails.';
 const DECISION_RECORD = '2026-10-18 | invoice.paid retries | Approve a persistent unique constraint on (provider, event_id). Keep the current receipt schema and retryable failures. Never log customer emails. | Human accepted (scripted sample)';
@@ -116,7 +116,7 @@ export function mountWorkspace(element) {
   }
   function chat() {
     const steps = visibleSteps();
-    return `<section class="wp-conversation" aria-labelledby="wp-chat-heading"><div class="wp-conversation-top"><div><span class="wp-eyebrow">CONVERSATION</span><h3 id="wp-chat-heading">Three retries. One upgrade.</h3></div><span class="wp-chat-tag">invoice.paid</span></div><div class="wp-scenario-context"><span class="wp-context-dot" aria-hidden="true"></span><p>A provider retries the same webhook three times. The membership upgrade happens twice.</p></div>${controls()}<div class="wp-chat-log" aria-label="Scripted development conversation" tabindex="0">${steps.length ? steps.map((step, index) => `<article class="wp-message wp-message-${step.actor}${index === state.step ? ' wp-message-latest' : ''}"><div class="wp-message-avatar">${mascot(step.actor)}</div><div class="wp-message-body"><div class="wp-message-byline"><strong>${actorLabel(step.actor)}</strong><small>${actorMeta(step.actor)}</small></div><p>${escapeHTML(step.text)}</p><button class="wp-message-event" type="button" data-wp-event="${index}" aria-pressed="${state.selected === index}">${step.kind} <span class="mono">#${step.id}</span> <span aria-hidden="true">↗</span></button>${index === 4 ? decisionCard() : ''}</div></article>`).join('') : `<div class="wp-chat-empty"><span class="wp-empty-mark" aria-hidden="true">↗</span><h4>Start with the actual bug.</h4><p>Send the example below. Watch a plan, a race-condition review, a human decision, and a fix carry through one thread.</p><span>Scripted demo. No live model responses.</span></div>`}</div><form class="wp-composer" novalidate><label for="wp-prompt">Your command <span>· editable demo input</span></label><textarea id="wp-prompt" name="prompt" rows="4" aria-describedby="wp-composer-note">${escapeHTML(state.draft)}</textarea><div class="wp-composer-bottom"><button type="button" class="wp-text-button" data-wp-action="load-example">Load example ↺</button><button class="wp-run" type="submit"${!isExample() || state.step >= 0 ? ' disabled' : ''}>Run sample <span aria-hidden="true">↑</span></button></div><p id="wp-composer-note">${!isExample() ? 'This preview cannot answer custom commands. Load the example to run its recorded scenario.' : state.step === STEPS.length - 1 ? 'Sample complete. Replay to follow the thread again.' : state.step >= 0 ? 'Sample is in progress. Use Next step or Replay; no model request is sent.' : 'Only this example runs a recorded scenario. Your text is not sent anywhere.'}</p>${reducedMotion() ? '<p class="wp-motion-note">Reduced motion is on. Use Next step to read at your pace.</p>' : ''}</form></section>`;
+    return `<section class="wp-conversation" aria-labelledby="wp-chat-heading"><div class="wp-conversation-top"><div><span class="wp-eyebrow">CONVERSATION</span><h3 id="wp-chat-heading">Three retries. One upgrade.</h3></div><span class="wp-chat-tag">invoice.paid</span></div><div class="wp-scenario-context"><span class="wp-context-dot" aria-hidden="true"></span><p>A provider retries the same webhook three times. The membership upgrade happens twice.</p></div>${controls()}<div class="wp-chat-log" aria-label="Scripted development conversation" tabindex="0">${steps.length ? steps.map((step, index) => `<article class="wp-message wp-message-${step.actor}${index === state.step ? ' wp-message-latest' : ''}"><div class="wp-message-avatar">${mascot(step.actor)}</div><div class="wp-message-body"><div class="wp-message-byline"><strong>${actorLabel(step.actor)}</strong><small>${actorMeta(step.actor)}</small></div><p>${escapeHTML(step.text)}</p><button class="wp-message-event" type="button" data-wp-event="${index}" aria-pressed="${state.selected === index}">${step.kind} <span class="mono">#${step.id}</span> <span aria-hidden="true">↗</span></button>${index === 4 ? decisionCard() : ''}</div></article>`).join('') : `<div class="wp-chat-empty"><span class="wp-empty-mark" aria-hidden="true">↗</span><h4>Start with the actual bug.</h4><p>Send the example below. Watch a plan, a race-condition review, a human decision, and a fix carry through one thread.</p><span>Scripted demo. No live model responses.</span></div>`}</div><form class="wp-composer" novalidate><label for="wp-prompt">Example command <span>· local draft</span></label><textarea id="wp-prompt" name="prompt" rows="4" aria-describedby="wp-composer-note">${escapeHTML(state.draft)}</textarea><div class="wp-composer-bottom"><button type="button" class="wp-text-button" data-wp-action="load-example">Load example ↺</button><button class="wp-run" type="submit"${state.step >= 0 ? ' disabled' : ''}>Play recorded example <span aria-hidden="true">↑</span></button></div><p id="wp-composer-note">${!isExample() ? 'Play recorded example restores the sample command. Your draft stays local and is not sent.' : state.step === STEPS.length - 1 ? 'Sample complete. Replay to follow the thread again.' : state.step >= 0 ? 'Sample is in progress. Use Next step or Replay; no model request is sent.' : 'Only this example runs a recorded scenario. Your text is not sent anywhere.'}</p>${reducedMotion() ? '<p class="wp-motion-note">Reduced motion is on. Use Next step to read at your pace.</p>' : ''}</form></section>`;
   }
   function quota() {
     const panels = [
@@ -172,7 +172,7 @@ export function mountWorkspace(element) {
     }, 6200);
   }
   function run() {
-    if (!isExample()) return;
+    state.draft = EXAMPLE_PROMPT;
     stop();
     state.step = 0;
     state.selected = 0;
@@ -201,8 +201,8 @@ export function mountWorkspace(element) {
     if (event.target.id !== 'wp-prompt') return;
     state.draft = event.target.value;
     stop();
-    content.querySelector('.wp-run').disabled = !isExample() || state.step >= 0;
-    content.querySelector('#wp-composer-note').textContent = !isExample() ? 'This preview cannot answer custom commands. Load the example to run its recorded scenario.' : state.step >= 0 ? 'Use Replay to run the example again.' : 'Only this example runs a recorded scenario. Your text is not sent anywhere.';
+    content.querySelector('.wp-run').disabled = state.step >= 0;
+    content.querySelector('#wp-composer-note').textContent = !isExample() ? 'Play recorded example restores the sample command. Your draft stays local and is not sent.' : state.step >= 0 ? 'Use Replay to run the example again.' : 'Only this example runs a recorded scenario. Your text is not sent anywhere.';
     const play = content.querySelector('[data-wp-action="play"]');
     if (play) play.textContent = 'Play';
   });
