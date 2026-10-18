@@ -1,8 +1,8 @@
-import config from './site-config.js';
-import { harnessLogo } from './logos.js';
-import { petContents, hydratePets } from './pets.js';
-import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js';
-import { mountWorkspace } from './workspace.js';
+import config from './site-config.js?v=ac0a98492dc49a45';
+import { harnessLogo } from './logos.js?v=ac0a98492dc49a45';
+import { petContents, hydratePets } from './pets.js?v=ac0a98492dc49a45';
+import { detectPlatform, googleFormUrls, registrationReady, registerBeta, betaCommunityLabel } from './services.js?v=ac0a98492dc49a45';
+import { mountWorkspace } from './workspace.js?v=ac0a98492dc49a45';
 
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
